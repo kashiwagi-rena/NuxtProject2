@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   productName: string
-  url: number
+  url: string
 }
 
 const props = defineProps<Props>();
