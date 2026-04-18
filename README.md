@@ -1,18 +1,20 @@
-denoでの、立ち上げ方
-```
-deno task dev 
-```
-
 ## リポジトリでやりたいこと
-- reCAPTCHAの実装(ファイルをまとめて行う)
-- 購入計算ロジック・フロントとサーバーでの二重計算ロジック
+- PHMの宣伝用
 
 ##　Linter・Formatter
 Biome
 
 **参考**
 [Biome](https://biomejs.dev/ja/guides/getting-started/)
-Denoで行いました。パッケージマネージャは、Deno
+パッケージマネージャは、npm
+
+**起動コマンド**
+```bash
+npx biome check .         # lint + format チェック
+npx biome check --write . # 自動修正
+npx biome format .        # フォーマットのみ
+npx biome lint .          # lintのみ
+```
 
 ## vueファイルのデフォルト値の設定方法
 1. コマンドパレットを開く。`(Mac: Cmd + Shift + P)`
