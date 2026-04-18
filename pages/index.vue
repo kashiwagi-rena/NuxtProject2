@@ -1,16 +1,45 @@
 <script setup lang="ts">
 import productInformation from '../json/productInformation.json'
+
+const positions = ref<{ top: number; left: number; duration: number; delay: number }[]>([])
+
+onMounted(() => {
+  const count = Object.keys(productInformation).length
+  const result = []
+  for (let i = 0; i < count; i++) {
+    let top, left
+    do {
+      top  = Math.random() * 80 + 5
+      left = Math.random() * 75 + 5
+    } while (top > 35 && top < 65 && left > 25 && left < 75)
+    result.push({
+      top,
+      left,
+      duration: Math.random() * 4 + 4,
+      delay:    Math.random() * 3,
+    })
+  }
+  positions.value = result
+})
 </script>
 
 <template>
 	<main>
 		<span class="meteor" />
 		<h1>Project Hail Mary</h1>
-		<form class="DisplayButtonWrap">
-			<div v-for="(value, key) in productInformation" :key="key">
-				<DisplayButton :product-name="value.productName" :unit-price="value.unitPrice" />
-			</div>
-		</form>
+		<div
+			v-for="(value, key, index) in productInformation"
+			:key="key"
+			class="floatItem"
+			:style="positions[index] ? {
+				top:               positions[index].top      + '%',
+				left:              positions[index].left     + '%',
+				animationDuration: positions[index].duration + 's',
+				animationDelay:    positions[index].delay    + 's',
+			} : { display: 'none' }"
+		>
+			<DisplayButton :product-name="value.productName" :url="value.url" />
+		</div>
 	</main>
 </template>
 
@@ -78,8 +107,8 @@ main::after {
 }
 
 h1 {
-	color: #e8f4fd;
-	text-shadow: 0 0 10px rgba(170, 212, 245, 0.8), 0 0 20px rgba(170, 212, 245, 0.4);
+	color: #fdd835;
+	text-shadow: 0 0 10px rgba(253, 216, 53, 0.9), 0 0 24px rgba(253, 216, 53, 0.5), 0 0 48px rgba(255, 200, 0, 0.3);
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -88,16 +117,16 @@ h1 {
 	white-space: nowrap;
 }
 
-.DisplayButtonWrap {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	position: relative;
+.floatItem {
+	position: absolute;
 	z-index: 1;
+	animation: floating ease-in-out infinite alternate;
 }
 
-.DisplayButtonWrap > div {
-	flex: 0 0 calc(33.333% - 7px);
+@keyframes floating {
+	0%   { transform: translateY(0px) translateX(0px); }
+	50%  { transform: translateY(-12px) translateX(5px); }
+	100% { transform: translateY(-20px) translateX(-5px); }
 }
 
 /* 流れ星 */
@@ -139,5 +168,11 @@ h1 {
 	15%  { opacity: 1; }
 	20%  { transform: rotate(215deg) translateX(500px); opacity: 0; }
 	100% { transform: rotate(215deg) translateX(500px); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+	h1 {
+		font-size: 1.2rem;
+	}
 }
 </style>

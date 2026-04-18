@@ -1,22 +1,22 @@
 {
   "1": {
-    "productName": "猫クッキー",
-    "unitPrice": 200
+    "productName": "映画公式サイト",
+    "url": "https://projecthm.movie/"
   },
   "2": {
-    "productName": "犬クッキー",
-    "unitPrice": 250
+    "productName": "小説",
+    "url": "https://amzn.asia/d/06gfAt87"
   },
   "3": {
     "productName": "チョコレートケーキ",
-    "unitPrice": 450
+    "url": "250"
   },
   "4": {
     "productName": "抹茶ラテ",
-    "unitPrice": 350
+    "url": "250"
   },
   "5": {
     "productName": "フルーツタルト",
-    "unitPrice": 380
+    "url": "250"
   }
 }
