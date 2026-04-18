@@ -9,7 +9,11 @@ const props = defineProps<Props>();
 const router = useRouter();
 
 const onHandler = () => {
-  router.push(`/${props.url}`)
+  if (props.url.startsWith('http')) {
+    navigateTo(props.url, { external: true })
+  } else {
+    router.push(props.url)
+  }
 }
 </script>
 
